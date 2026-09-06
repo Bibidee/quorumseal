@@ -1,6 +1,7 @@
 import importlib.util
 import sys
 import types
+import hashlib
 from pathlib import Path
 
 spec = importlib.util.spec_from_file_location("quorumseal", Path("contracts/quorumseal.py"))
@@ -75,3 +76,31 @@ def test_approved_outputs_with_different_rationales_remain_equivalent():
     left, right = analysis(confidence=75), analysis(confidence=100)
     right["rationale"] = "different bounded explanation"
     assert m.equivalent(left, right)
+
+def test_fetch_verified_hashes_raw_bytes_and_decodes_utf8():
+    m = load(); raw = b"payload bytes"
+    m.gl.nondet = types.SimpleNamespace(web=types.SimpleNamespace(get=lambda _: types.SimpleNamespace(status=200, body=raw)))
+    assert m.fetch_verified("https://example.com/p", "0x" + hashlib.sha256(raw).hexdigest()) == "payload bytes"
+
+def test_fetch_verified_rejects_hash_mismatch_and_http_failure():
+    m = load(); raw = b"payload bytes"
+    m.gl.nondet = types.SimpleNamespace(web=types.SimpleNamespace(get=lambda _: types.SimpleNamespace(status=404, body=raw)))
+    try: m.fetch_verified("https://example.com/p", "0x" + hashlib.sha256(raw).hexdigest())
+    except ValueError: pass
+    else: assert False
+    m.gl.nondet = types.SimpleNamespace(web=types.SimpleNamespace(get=lambda _: types.SimpleNamespace(status=200, body=raw)))
+    try: m.fetch_verified("https://example.com/p", "0x" + "00" * 32)
+    except ValueError: pass
+    else: assert False
+
+def test_fetch_verified_rejects_empty_and_non_utf8():
+    m = load()
+    m.gl.nondet = types.SimpleNamespace(web=types.SimpleNamespace(get=lambda _: types.SimpleNamespace(status=200, body=b"")))
+    try: m.fetch_verified("https://example.com/p", "0x" + "00" * 32)
+    except ValueError: pass
+    else: assert False
+    raw = b"\xff\xfe"
+    m.gl.nondet = types.SimpleNamespace(web=types.SimpleNamespace(get=lambda _: types.SimpleNamespace(status=200, body=raw)))
+    try: m.fetch_verified("https://example.com/p", "0x" + hashlib.sha256(raw).hexdigest())
+    except ValueError: pass
+    else: assert False

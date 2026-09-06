@@ -124,10 +124,10 @@ class QuorumSeal(gl.Contract):
         seal.status = CANCELLED
 
     @gl.public.view
-    def get_seal(self, seal_id: str):
+    def get_seal(self, seal_id: str) -> dict:
         seal = self.seals.get(ident(seal_id))
         if seal is None: raise gl.vm.UserError("[EXPECTED] Seal not found")
         return {"id": seal.id, "proposer": seal.proposer.as_hex, "consumer": seal.consumer.as_hex, "payload_url": seal.payload_url, "payload_hash": seal.payload_hash, "evidence_url": seal.evidence_url, "evidence_hash": seal.evidence_hash, "summary": seal.summary, "status": seal.status, "confidence": str(seal.confidence), "rationale": seal.rationale}
 
     @gl.public.view
-    def get_info(self): return {"name": "QuorumSeal", "version": "0.2.0", "min_confidence": str(MIN_CONFIDENCE), "max_payload_bytes": str(MAX_PAYLOAD_BYTES)}
+    def get_info(self) -> dict: return {"name": "QuorumSeal", "version": "0.2.0", "min_confidence": str(MIN_CONFIDENCE), "max_payload_bytes": str(MAX_PAYLOAD_BYTES)}
