@@ -10,6 +10,6 @@ QuorumSeal holds no funds or escrow and does not prove external-world truth. Exa
 
 - Version: v0.2.0.
 - Direct Mode: 7 tests passing; preflight, GenVM lint, and ABI schema passing locally.
-- Current deployment: [0xAd9FF5Bd3d9b5E49264bC825A45c30409D236aF0](https://explorer-studio.genlayer.com/address/0xAd9FF5Bd3d9b5E49264bC825A45c30409D236aF0).
-- Deployment transaction: [0xad62f6ebb20029a56424bc28af6c0e1f476fe93e7eed64ac13b22db33b6ccc80](https://explorer-studio.genlayer.com/tx/0xad62f6ebb20029a56424bc28af6c0e1f476fe93e7eed64ac13b22db33b6ccc80), FINALIZED with GenVM SUCCESS.
-- Source SHA-256: `5e800d049ce1f2b1a032bd9283a4f3a14953e27c6fdba4e7ab4305d6078aa00b`.
+- Current deployment: [0x7ad42e7f6f2A0f2C10402a55e5B158d0E320CAde](https://explorer-studio.genlayer.com/address/0x7ad42e7f6f2A0f2C10402a55e5B158d0E320CAde).
+- Deployment transaction: [0x3c0d835a2104936dd5e8c37acdfcf09733b7eb56bc0ba1008a5a31d55e8e8dc5](https://explorer-studio.genlayer.com/tx/0x3c0d835a2104936dd5e8c37acdfcf09733b7eb56bc0ba1008a5a31d55e8e8dc5), FINALIZED with GenVM SUCCESS.
+- Source SHA-256: `f5193fb375cf27f16bfc8abc3535f660c2c9980cc49d49807348a43a991ee9c5`.
