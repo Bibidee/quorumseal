@@ -101,6 +101,10 @@ def test_real_direct_access_and_terminal_state_guards(direct_vm, direct_deploy, 
     direct_vm.sender = direct_alice
     with direct_vm.expect_revert():
         contract.consume("QS-ACCESS")
+    direct_vm.sender = direct_bob
+    contract.consume("QS-ACCESS")
+    with direct_vm.expect_revert():
+        contract.consume("QS-ACCESS")
 
 
 @pytest.mark.direct
@@ -118,6 +122,5 @@ def test_real_direct_blocked_review_is_terminal(direct_vm, direct_deploy, direct
     with direct_vm.expect_revert():
         contract.cancel("QS-BLOCKED")
     direct_vm.sender = direct_bob
-    contract.consume("QS-ACCESS")
     with direct_vm.expect_revert():
-        contract.consume("QS-ACCESS")
+        contract.consume("QS-BLOCKED")
