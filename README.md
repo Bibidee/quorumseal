@@ -8,7 +8,7 @@ QuorumSeal holds no funds or escrow and does not prove external-world truth. Exa
 
 ## Release evidence
 
-- Version: v0.2.1.
+- Version: v0.2.2 source candidate. The v0.2.1 deployment below is historical.
 - Contract freeze commit: `524db3f820aa3b47ed1cb469800990be382b41a7`.
 - Tests: 11 helper/unit tests and 6 genuine Direct Mode contract tests passed (17 total); preflight, GenVM lint, and ABI schema passed.
 - StudioNet contract: [0xCfE935A245CDC8963348B3CBb97dFb6b00bB80f9](https://explorer-studio.genlayer.com/address/0xCfE935A245CDC8963348B3CBb97dFb6b00bB80f9).
