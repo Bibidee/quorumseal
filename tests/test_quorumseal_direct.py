@@ -101,6 +101,22 @@ def test_real_direct_access_and_terminal_state_guards(direct_vm, direct_deploy, 
     direct_vm.sender = direct_alice
     with direct_vm.expect_revert():
         contract.consume("QS-ACCESS")
+
+
+@pytest.mark.direct
+def test_real_direct_blocked_review_is_terminal(direct_vm, direct_deploy, direct_alice, direct_bob):
+    contract = direct_deploy("contracts/quorumseal.py")
+    direct_vm.sender = direct_alice
+    contract.propose("QS-BLOCKED", direct_bob, PAYLOAD_URL, PAYLOAD_HASH, EVIDENCE_URL, EVIDENCE_HASH, "summary")
+    _configure(direct_vm, {"payload_match": "yes", "evidence_support": "yes", "risk": "yes", "confidence": 90, "rationale": "material risk"})
+    contract.review("QS-BLOCKED")
+    assert contract.get_seal("QS-BLOCKED")["status"] == "blocked"
+    with direct_vm.expect_revert():
+        contract.review("QS-BLOCKED")
+    with direct_vm.expect_revert():
+        contract.consume("QS-BLOCKED")
+    with direct_vm.expect_revert():
+        contract.cancel("QS-BLOCKED")
     direct_vm.sender = direct_bob
     contract.consume("QS-ACCESS")
     with direct_vm.expect_revert():

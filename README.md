@@ -9,7 +9,7 @@ QuorumSeal holds no funds or escrow and does not prove external-world truth. Exa
 ## Release evidence
 
 - Version: v0.2.0.
-- Tests: 10 helper/unit tests and 5 genuine Direct Mode contract tests passed (15 total); preflight, GenVM lint, and ABI schema passed in the release environment.
+- Tests: 10 helper/unit tests and 6 genuine Direct Mode contract tests passed (16 total); preflight, GenVM lint, and ABI schema passed in the release environment.
 - Current deployment: [0x7ad42e7f6f2A0f2C10402a55e5B158d0E320CAde](https://explorer-studio.genlayer.com/address/0x7ad42e7f6f2A0f2C10402a55e5B158d0E320CAde).
 - Deployment transaction: [0x3c0d835a2104936dd5e8c37acdfcf09733b7eb56bc0ba1008a5a31d55e8e8dc5](https://explorer-studio.genlayer.com/tx/0x3c0d835a2104936dd5e8c37acdfcf09733b7eb56bc0ba1008a5a31d55e8e8dc5), FINALIZED with GenVM SUCCESS.
 - Source SHA-256: `f5193fb375cf27f16bfc8abc3535f660c2c9980cc49d49807348a43a991ee9c5`.

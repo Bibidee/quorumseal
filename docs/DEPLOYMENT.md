@@ -1,6 +1,6 @@
 # Deployment
 
-The v0.2.0 release gate passed: 10 helper/unit tests and 5 genuine Direct Mode contract tests (15 total), plus syntax, GenVM lint, ABI schema, and preflight.
+The v0.2.0 release gate passed: 10 helper/unit tests and 6 genuine Direct Mode contract tests (16 total), plus syntax, GenVM lint, ABI schema, and preflight.
 
 - Contract: [0x7ad42e7f6f2A0f2C10402a55e5B158d0E320CAde](https://explorer-studio.genlayer.com/address/0x7ad42e7f6f2A0f2C10402a55e5B158d0E320CAde)
 - Deployment transaction: [0x3c0d835a2104936dd5e8c37acdfcf09733b7eb56bc0ba1008a5a31d55e8e8dc5](https://explorer-studio.genlayer.com/tx/0x3c0d835a2104936dd5e8c37acdfcf09733b7eb56bc0ba1008a5a31d55e8e8dc5)
