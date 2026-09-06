@@ -9,8 +9,11 @@ QuorumSeal holds no funds or escrow and does not prove external-world truth. Exa
 ## Release evidence
 
 - Version: v0.2.0.
-- Direct Mode: 7 tests passing; preflight, GenVM lint, and ABI schema passing locally.
+- Tests: 10 helper/unit tests and 3 genuine Direct Mode contract tests passed (13 total); preflight, GenVM lint, and ABI schema passed in the release environment.
 - Current deployment: [0x7ad42e7f6f2A0f2C10402a55e5B158d0E320CAde](https://explorer-studio.genlayer.com/address/0x7ad42e7f6f2A0f2C10402a55e5B158d0E320CAde).
 - Deployment transaction: [0x3c0d835a2104936dd5e8c37acdfcf09733b7eb56bc0ba1008a5a31d55e8e8dc5](https://explorer-studio.genlayer.com/tx/0x3c0d835a2104936dd5e8c37acdfcf09733b7eb56bc0ba1008a5a31d55e8e8dc5), FINALIZED with GenVM SUCCESS.
 - Source SHA-256: `f5193fb375cf27f16bfc8abc3535f660c2c9980cc49d49807348a43a991ee9c5`.
-- GitHub Actions release gate: [run 34037930541](https://github.com/Bibidee/quorumseal/actions/runs/34037930541), completed successfully for the final documentation HEAD.
+- Deployed-source parity: VERIFIED. `gen_getContractCode` returned the deployed source as base64; decoded bytes matched the repository source byte-for-byte (7,674 bytes; SHA-256 above).
+- GitHub Actions release gate: [run 34037930541](https://github.com/Bibidee/quorumseal/actions/runs/34037930541), completed successfully for the pre-parity documentation HEAD.
+
+Live semantic review and consumption evidence are not claimed here; they remain separate StudioNet integration work.
