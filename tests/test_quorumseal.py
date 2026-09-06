@@ -42,3 +42,36 @@ def test_malformed_outputs_never_consensus():
     m = load()
     assert not m.equivalent(analysis(risk="yes"), {"garbage": True})
     assert not m.equivalent({"garbage": True}, {"garbage": False})
+
+def test_decision_fails_closed_for_unclear_and_low_confidence():
+    m = load()
+    assert m.decision(analysis(payload="unclear")) == m.BLOCKED
+    assert m.decision(analysis(evidence="unclear")) == m.BLOCKED
+    assert m.decision(analysis(confidence=74)) == m.BLOCKED
+
+def test_validation_rejects_extra_missing_and_bad_fields():
+    m = load()
+    assert not m.valid({"payload_match": "yes"})
+    bad = analysis(); bad["extra"] = True
+    assert not m.valid(bad)
+    assert not m.valid(analysis(confidence=True))
+    assert not m.valid(analysis(risk="maybe"))
+
+def test_hash_and_url_guards_are_strict():
+    m = load()
+    assert m.digest("0x" + "ab" * 32) == "0x" + "ab" * 32
+    for value in ("0x00", "ab" * 32, "0x" + "zz" * 32):
+        try: m.digest(value)
+        except Exception: pass
+        else: assert False
+    assert m.url("https://example.com/evidence")
+    for value in ("http://example.com", "https://localhost/x", "https://127.0.0.1/x", "https://user:pass@example.com/x"):
+        try: m.url(value)
+        except Exception: pass
+        else: assert False
+
+def test_approved_outputs_with_different_rationales_remain_equivalent():
+    m = load()
+    left, right = analysis(confidence=75), analysis(confidence=100)
+    right["rationale"] = "different bounded explanation"
+    assert m.equivalent(left, right)

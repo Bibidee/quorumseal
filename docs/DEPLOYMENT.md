@@ -1,13 +1,12 @@
 # Deployment
 
-## StudioNet deployment
+The v0.2.0 release gate passed: Direct Mode 7/7, syntax, GenVM lint, ABI schema, and preflight.
 
-The release gate passed before deployment: Direct Mode 3/3, Python syntax, GenVM lint, ABI schema generation, and preflight all passed. The finalized deployment is:
+- Contract: [0xAd9FF5Bd3d9b5E49264bC825A45c30409D236aF0](https://explorer-studio.genlayer.com/address/0xAd9FF5Bd3d9b5E49264bC825A45c30409D236aF0)
+- Deployment transaction: [0xad62f6ebb20029a56424bc28af6c0e1f476fe93e7eed64ac13b22db33b6ccc80](https://explorer-studio.genlayer.com/tx/0xad62f6ebb20029a56424bc28af6c0e1f476fe93e7eed64ac13b22db33b6ccc80)
+- Status: FINALIZED; GenVM SUCCESS.
+- Constructor: no arguments (permissionless deployment).
+- Source SHA-256: `5e800d049ce1f2b1a032bd9283a4f3a14953e27c6fdba4e7ab4305d6078aa00b`.
+- `get_info()`: QuorumSeal v0.2.0, minimum confidence 75, maximum payload 24000 bytes.
 
-- Contract: [0x7b28F495959a1598540f9e0abF6b212507304f9e](https://explorer-studio.genlayer.com/address/0x7b28F495959a1598540f9e0abF6b212507304f9e)
-- Deployment transaction: [0x3ea75ccf7adb591c3be01ebb0f982f4dfd293009731cf8e1c1018f03ed306674](https://explorer-studio.genlayer.com/tx/0x3ea75ccf7adb591c3be01ebb0f982f4dfd293009731cf8e1c1018f03ed306674)
-- Status: FINALIZED; leader GenVM result SUCCESS.
-- Constructor owner: `0x79b3ecbe6a65bee93b2fcda78e6909892671507f`.
-- Local source SHA-256: `4022346ad219ee8995b815896205d94db4095f60642e61996474578e16d13484`.
-
-The Explorer source should be retrieved and compared byte-for-byte against `contracts/quorumseal.py` before external submission. The first deployment attempt used an incorrectly typed constructor argument and was rejected; it is not the release deployment. A finalized `get_info()` read from the release address returned `QuorumSeal` v0.1.0.
+Explorer source retrieval and byte-for-byte parity must be checked before final external submission; no parity claim is made here without raw-source retrieval.
