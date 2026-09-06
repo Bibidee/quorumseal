@@ -17,6 +17,7 @@ def load():
         fake.gl = gl
         fake.Address = type("Address", (), {"__init__": lambda self, value="": setattr(self, "as_hex", value)})
         fake.u256 = int
+        fake.TreeMap = dict
         fake.allow_storage = lambda cls: cls
         sys.modules["genlayer"] = fake
     spec.loader.exec_module(module)

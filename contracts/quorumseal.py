@@ -83,10 +83,11 @@ def semantic_review(seal):
         return {"error": "observation_error"}
 
 class QuorumSeal(gl.Contract):
+    seals: TreeMap[str, Seal]
+
     def __init__(self, owner: Address):
         if owner.as_hex.lower() == "0x" + "0" * 40: raise gl.vm.UserError("[EXPECTED] Zero owner")
         self.owner = owner
-        self.seals = {}
 
     @gl.public.write
     def propose(self, seal_id: str, consumer: Address, payload_hash: str, evidence_url: str, evidence_hash: str, summary: str):
