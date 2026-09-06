@@ -70,3 +70,38 @@ def test_real_direct_input_guards(direct_vm, direct_deploy, direct_alice, direct
         contract.propose("zero", bytes(20), PAYLOAD_URL, PAYLOAD_HASH, EVIDENCE_URL, EVIDENCE_HASH, "summary")
     with direct_vm.expect_revert():
         contract.propose("long", direct_bob, PAYLOAD_URL, PAYLOAD_HASH, EVIDENCE_URL, EVIDENCE_HASH, "x" * 401)
+
+
+@pytest.mark.direct
+def test_real_direct_summary_boundary_and_duplicate(direct_vm, direct_deploy, direct_alice, direct_bob):
+    contract = direct_deploy("contracts/quorumseal.py")
+    direct_vm.sender = direct_alice
+    exact = "x" * 400
+    contract.propose("QS-BOUNDARY", direct_bob, PAYLOAD_URL, PAYLOAD_HASH, EVIDENCE_URL, EVIDENCE_HASH, exact)
+    assert contract.get_seal("QS-BOUNDARY")["summary"] == exact
+    with direct_vm.expect_revert():
+        contract.propose("QS-BOUNDARY", direct_bob, PAYLOAD_URL, PAYLOAD_HASH, EVIDENCE_URL, EVIDENCE_HASH, "duplicate")
+    with direct_vm.expect_revert():
+        contract.propose("QS-BLANK", direct_bob, PAYLOAD_URL, PAYLOAD_HASH, EVIDENCE_URL, EVIDENCE_HASH, " \t ")
+
+
+@pytest.mark.direct
+def test_real_direct_access_and_terminal_state_guards(direct_vm, direct_deploy, direct_alice, direct_bob):
+    contract = direct_deploy("contracts/quorumseal.py")
+    direct_vm.sender = direct_alice
+    contract.propose("QS-ACCESS", direct_bob, PAYLOAD_URL, PAYLOAD_HASH, EVIDENCE_URL, EVIDENCE_HASH, "summary")
+    direct_vm.sender = direct_bob
+    with direct_vm.expect_revert():
+        contract.cancel("QS-ACCESS")
+    direct_vm.sender = direct_alice
+    _configure(direct_vm, {"payload_match": "yes", "evidence_support": "yes", "risk": "no", "confidence": 90, "rationale": "supported"})
+    contract.review("QS-ACCESS")
+    with direct_vm.expect_revert():
+        contract.cancel("QS-ACCESS")
+    direct_vm.sender = direct_alice
+    with direct_vm.expect_revert():
+        contract.consume("QS-ACCESS")
+    direct_vm.sender = direct_bob
+    contract.consume("QS-ACCESS")
+    with direct_vm.expect_revert():
+        contract.consume("QS-ACCESS")
