@@ -3,6 +3,11 @@ import json
 import os
 
 import pytest
+from gltest.direct import sdk_loader
+
+# Pin Direct Mode to the supported runtime release; GitHub's latest release
+# currently points at an unavailable prerelease artifact.
+sdk_loader.get_latest_version = lambda: "v0.2.12"
 
 
 @pytest.fixture(autouse=True)
