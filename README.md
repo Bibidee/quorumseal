@@ -8,21 +8,21 @@ QuorumSeal holds no funds or escrow and does not prove external-world truth. Exa
 
 ## Release evidence
 
-- Version: v0.2.2 source candidate. The v0.2.1 deployment below is historical.
-- Contract freeze commit: `524db3f820aa3b47ed1cb469800990be382b41a7`.
-- Tests: 11 helper/unit tests and 6 genuine Direct Mode contract tests passed (17 total); preflight, GenVM lint, and ABI schema passed.
-- StudioNet contract: [0xCfE935A245CDC8963348B3CBb97dFb6b00bB80f9](https://explorer-studio.genlayer.com/address/0xCfE935A245CDC8963348B3CBb97dFb6b00bB80f9).
-- Deployment: [0x0a16af48d1b99ae811110f31a20f722429770156e22a03b9889b1a61732f58a0](https://explorer-studio.genlayer.com/tx/0x0a16af48d1b99ae811110f31a20f722429770156e22a03b9889b1a61732f58a0), FINALIZED / MAJORITY_AGREE / GenVM SUCCESS.
-- Source SHA-256: `a2723c637bbdbc5bbd054c4cb2bf57fd0d53e233a3746884a53e8c568de33601`.
-- Source parity: VERIFIED through `gen_getContractCode`; the 8,887 deployed bytes match `contracts/quorumseal.py` byte-for-byte.
-- Freeze-commit CI: [run 34050038366](https://github.com/Bibidee/quorumseal/actions/runs/34050038366), completed successfully.
+- Version: v0.2.2.
+- Contract freeze commit: `4f39e5b5ef023aceb13263269a75bfafee9a4138`.
+- Tests: 12 helper/unit tests and 34 genuine Direct Mode contract tests passed (46 total). The Direct Mode suite covers artifact failures, malformed model output, malicious-summary isolation, lifecycle/access control, and seven actual `run_validator()` disagreement cases.
+- StudioNet contract: [0x4495e1A63062f7c522A26e7F2b494F72B8aDDee7](https://explorer-studio.genlayer.com/address/0x4495e1A63062f7c522A26e7F2b494F72B8aDDee7).
+- Deployment: [0x0812a35ba4bd5a113af536c34f38bedad2639fb74b66f8e6dd786ae2ae9ec312](https://explorer-studio.genlayer.com/tx/0x0812a35ba4bd5a113af536c34f38bedad2639fb74b66f8e6dd786ae2ae9ec312), FINALIZED / MAJORITY_AGREE / GenVM SUCCESS.
+- Source SHA-256: `8130be01c3ceccf2dbf9209b1f0149365e1f1a00ff27b0515275f4a3b84098c1`.
+- Source parity: VERIFIED through `gen_getContractCode`; the 8,853 deployed bytes match `contracts/quorumseal.py` byte-for-byte.
+- Freeze-commit CI: [run 34052207874](https://github.com/Bibidee/quorumseal/actions/runs/34052207874), completed successfully.
 
 ## Live lifecycle evidence
 
-Seal `QS-LIVE-V021-001` binds [payload](https://raw.githubusercontent.com/Bibidee/quorumseal/0aad42764e6b9ca6e6f182b0054891ca7d9264d9/docs/live/payload.txt) SHA-256 `0xd9ae2ce9d991b991b1d72c7b06058e20d91710f011b25e3c3ba98b34a776ee24` and [evidence](https://raw.githubusercontent.com/Bibidee/quorumseal/0aad42764e6b9ca6e6f182b0054891ca7d9264d9/docs/live/evidence.txt) SHA-256 `0xeb94cbea09fa3935b9d9e5e29320d7bd99d644021d3bdd70271e0d3d34d010d0`.
+Seal `QS-LIVE-V022-001` binds [payload](https://raw.githubusercontent.com/Bibidee/quorumseal/89c836a775af6a153ff81c7af7a382d67b36657a/docs/live/v022-payload.txt) SHA-256 `0x2a575d94b9ccfd6c2f4ca7d114169b55edd55d717a2e1384d6d7b8e4c3a096a9` and [evidence](https://raw.githubusercontent.com/Bibidee/quorumseal/89c836a775af6a153ff81c7af7a382d67b36657a/docs/live/v022-evidence.txt) SHA-256 `0x40209cae06836a028b467f55812abab891bd99b551e22e1aa6d58e20473fefe8`.
 
-- [Proposal](https://explorer-studio.genlayer.com/tx/0x5803969ff872f399318e0f21b82df84850793731b95d4533beed1ec08b8a7a98): persisted as `pending` with exact commitments.
-- [Semantic review](https://explorer-studio.genlayer.com/tx/0x17d6d6a9dbcf6054914d2ae7b4964e4efbddf8ea4464b6a741e5c36741138fb0): FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; `approved`, confidence 100, rationale “The evidence explicitly authorizes the exact payload specified.”
-- [Consumption](https://explorer-studio.genlayer.com/tx/0xfc90c4fce6b5f66cba9f42b8108c9666afe95bd9fc326477483050f8cc244939): FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; final state `consumed`.
+- [Proposal](https://explorer-studio.genlayer.com/tx/0xa9e6bb1fc667a05709ceeacd974bd81b5f4c2a22fc06c72d0288e218a1a45ca9): FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; persisted as `pending` with exact commitments.
+- [Semantic review](https://explorer-studio.genlayer.com/tx/0xc8928e6e4d6857d5196ef5309d07b3cb22b49a0476a4b4687ecf80e646927ee7): FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; `approved`, confidence 96, rationale “Evidence explicitly authorizes the exact QuorumSeal v0.2.2 live verification ID in the payload.”
+- [Consumption](https://explorer-studio.genlayer.com/tx/0xa2ed5e6249eb3b95a18d4b2625a9263a7cf2b5b3f51a3f4be84cae4a5d53163b): FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; final state `consumed`.
 
-The older v0.2.0 contract `0x7ad42e7f6f2A0f2C10402a55e5B158d0E320CAde` is historical and is not the current release.
+The v0.2.1 contract `0xCfE935A245CDC8963348B3CBb97dFb6b00bB80f9` and older v0.2.0 deployment are historical.
