@@ -8,5 +8,6 @@ The v0.2.0 release gate passed: Direct Mode 7/7, syntax, GenVM lint, ABI schema,
 - Constructor: no arguments (permissionless deployment).
 - Source SHA-256: `f5193fb375cf27f16bfc8abc3535f660c2c9980cc49d49807348a43a991ee9c5`.
 - `get_info()`: QuorumSeal v0.2.0, minimum confidence 75, maximum payload 24000 bytes.
+- GitHub Actions release gate run 34037930541 completed successfully for the final documentation HEAD.
 
 Explorer source retrieval and byte-for-byte parity must be checked before final external submission; no parity claim is made here without raw-source retrieval.
