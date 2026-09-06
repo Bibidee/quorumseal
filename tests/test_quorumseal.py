@@ -8,7 +8,9 @@ spec = importlib.util.spec_from_file_location("quorumseal", Path("contracts/quor
 module = importlib.util.module_from_spec(spec)
 
 def load():
+    injected = False
     if "genlayer" not in sys.modules:
+        injected = True
         gl = types.SimpleNamespace()
         gl.Contract = type("Contract", (), {})
         gl.Event = type("Event", (), {})
@@ -22,6 +24,8 @@ def load():
         fake.allow_storage = lambda cls: cls
         sys.modules["genlayer"] = fake
     spec.loader.exec_module(module)
+    if injected:
+        sys.modules.pop("genlayer", None)
     return module
 
 def analysis(payload="yes", evidence="yes", risk="no", confidence=90):

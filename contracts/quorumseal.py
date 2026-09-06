@@ -48,6 +48,9 @@ def url(value):
         raise gl.vm.UserError("[EXPECTED] Invalid evidence URL")
     return result
 
+def address(value):
+    return value if hasattr(value, "as_hex") else Address(value)
+
 def valid(value):
     if not isinstance(value, dict) or set(value.keys()) != {"payload_match", "evidence_support", "risk", "confidence", "rationale"}: return False
     if any(value.get(k) not in ("yes", "no", "unclear") for k in ("payload_match", "evidence_support", "risk")): return False
@@ -85,12 +88,14 @@ class QuorumSeal(gl.Contract):
     seals: TreeMap[str, Seal]
 
     def __init__(self):
-        pass
+        self.seals = TreeMap()
 
     @gl.public.write
     def propose(self, seal_id: str, consumer: Address, payload_url: str, payload_hash: str, evidence_url: str, evidence_hash: str, summary: str):
+        consumer = address(consumer)
         seal_id, payload_url, payload_hash, evidence_url, evidence_hash = ident(seal_id), url(payload_url), digest(payload_hash), url(evidence_url), digest(evidence_hash)
-        if consumer.as_hex.lower() == "0x" + "0" * 40 or not clean(summary): raise gl.vm.UserError("[EXPECTED] Invalid proposal")
+        summary = clean(summary)
+        if consumer.as_hex.lower() == "0x" + "0" * 40 or not summary or len(summary) > MAX_TEXT: raise gl.vm.UserError("[EXPECTED] Invalid proposal")
         if seal_id in self.seals: raise gl.vm.UserError("[EXPECTED] Duplicate seal")
         self.seals[seal_id] = Seal(seal_id, gl.message.sender_address, consumer, payload_url, payload_hash, evidence_url, evidence_hash, clean(summary), PENDING, u256(0), "")
 
@@ -120,7 +125,7 @@ class QuorumSeal(gl.Contract):
     @gl.public.write
     def cancel(self, seal_id: str):
         seal = self.seals.get(ident(seal_id))
-        if seal is None or gl.message.sender_address != seal.proposer or seal.status in (CONSUMED, CANCELLED): raise gl.vm.UserError("[EXPECTED] Cannot cancel")
+        if seal is None or gl.message.sender_address != seal.proposer or seal.status != PENDING: raise gl.vm.UserError("[EXPECTED] Cannot cancel")
         seal.status = CANCELLED
 
     @gl.public.view
