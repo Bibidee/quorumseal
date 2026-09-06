@@ -10,7 +10,10 @@ if len(contracts) != 1:
     raise SystemExit(f"expected exactly one deployable source, found {len(contracts)}")
 ast.parse(contracts[0].read_text(encoding="utf-8"))
 subprocess.run([sys.executable, "-m", "pytest", "tests", "-q"], cwd=root, check=True)
-lint = shutil.which("genvm-lint")
+lint = shutil.which("genvm-lint") or shutil.which("genvm-lint.exe")
+if not lint:
+    sibling = Path(sys.executable).with_name("genvm-lint.exe" if sys.platform == "win32" else "genvm-lint")
+    lint = str(sibling) if sibling.exists() else None
 if not lint:
     raise SystemExit("genvm-lint is required for preflight")
 subprocess.run([lint, "check", str(contracts[0]), "--json"], cwd=root, check=True)

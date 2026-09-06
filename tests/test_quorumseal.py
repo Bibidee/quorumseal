@@ -43,10 +43,13 @@ def test_equivalence_compares_valid_derived_decision():
     assert m.equivalent(analysis(risk="yes"), analysis(payload="no"))
     assert not m.equivalent(analysis(), analysis(risk="yes"))
 
-def test_malformed_outputs_never_consensus():
+def test_malformed_outputs_normalize_to_safe_consensus():
     m = load()
-    assert not m.equivalent(analysis(risk="yes"), {"garbage": True})
-    assert not m.equivalent({"garbage": True}, {"garbage": False})
+    left = m.normalize_review({"garbage": True})
+    right = m.normalize_review({"garbage": False})
+    assert m.valid(left) and m.decision(left) == m.BLOCKED
+    assert m.equivalent(left, right)
+    assert not m.equivalent(left, analysis())
 
 def test_decision_fails_closed_for_unclear_and_low_confidence():
     m = load()
@@ -54,13 +57,20 @@ def test_decision_fails_closed_for_unclear_and_low_confidence():
     assert m.decision(analysis(evidence="unclear")) == m.BLOCKED
     assert m.decision(analysis(confidence=74)) == m.BLOCKED
 
-def test_validation_rejects_extra_missing_and_bad_fields():
+def test_normalization_accepts_extra_and_rejects_missing_and_bad_fields():
     m = load()
-    assert not m.valid({"payload_match": "yes"})
+    assert m.normalize_review({"payload_match": "yes"})["rationale"] == "malformed_model_output"
     bad = analysis(); bad["extra"] = True
-    assert not m.valid(bad)
-    assert not m.valid(analysis(confidence=True))
-    assert not m.valid(analysis(risk="maybe"))
+    assert m.normalize_review(bad) == analysis()
+    assert m.normalize_review(analysis(confidence=True))["rationale"] == "malformed_model_output"
+    assert m.normalize_review(analysis(risk="maybe"))["rationale"] == "malformed_model_output"
+
+def test_normalization_handles_case_whitespace_and_bounds():
+    m = load()
+    value = analysis(); value.update({"payload_match": " YES ", "evidence_support": "YES", "risk": " NO "})
+    assert m.decision(m.normalize_review(value)) == m.APPROVED
+    for bad in (None, analysis(confidence=-1), analysis(confidence=101), analysis(confidence=True)):
+        assert m.decision(m.normalize_review(bad)) == m.BLOCKED
 
 def test_hash_and_url_guards_are_strict():
     m = load()
