@@ -26,14 +26,14 @@ The integrating contract must use the designated consumer identity, verify the c
 
 ## Release evidence
 
-- Version: v0.2.2.
-- Contract freeze commit: `4f39e5b5ef023aceb13263269a75bfafee9a4138`.
+- Version: v0.2.3.
+- Contract freeze commit: `08c00104d573f347d6389ed78bdd56c84ed12b02`.
 - Tests: 12 helper/unit tests and 34 genuine Direct Mode contract tests passed (46 total). The Direct Mode suite covers artifact failures, malformed model output, malicious-summary isolation, lifecycle/access control, and seven actual `run_validator()` disagreement cases.
 - StudioNet contract: [0x4495e1A63062f7c522A26e7F2b494F72B8aDDee7](https://explorer-studio.genlayer.com/address/0x4495e1A63062f7c522A26e7F2b494F72B8aDDee7).
 - Deployment: [0x0812a35ba4bd5a113af536c34f38bedad2639fb74b66f8e6dd786ae2ae9ec312](https://explorer-studio.genlayer.com/tx/0x0812a35ba4bd5a113af536c34f38bedad2639fb74b66f8e6dd786ae2ae9ec312), FINALIZED / MAJORITY_AGREE / GenVM SUCCESS.
-- Source SHA-256: `8130be01c3ceccf2dbf9209b1f0149365e1f1a00ff27b0515275f4a3b84098c1`.
+- Source SHA-256: `e21b6c47fffc2af43f178a334f18c6a07fc688520ca9b0fc39e65bc239c86b2b`.
 - Source parity: VERIFIED through `gen_getContractCode`; the 8,853 deployed bytes match `contracts/quorumseal.py` byte-for-byte.
-- Freeze-commit CI: [run 34052207874](https://github.com/Bibidee/quorumseal/actions/runs/34052207874), completed successfully.
+- Final-head CI: [run 34088281175](https://github.com/Bibidee/quorumseal/actions/runs/34088281175), completed successfully.
 
 ## Live lifecycle evidence
 

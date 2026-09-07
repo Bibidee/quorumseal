@@ -1,16 +1,16 @@
 # Deployment
 
-The v0.2.2 release gate passed: 12 helper/unit tests and 34 genuine Direct Mode contract tests (46 total), plus syntax, GenVM lint, ABI schema, and preflight. Direct Mode includes explicit artifact-failure, malformed-output, summary-injection, lifecycle/access-control, and `run_validator()` disagreement coverage.
+The v0.2.3 release gate passed: 12 helper/unit tests and 34 genuine Direct Mode contract tests (46 total), plus syntax, GenVM lint, ABI schema, and preflight. Direct Mode includes explicit artifact-failure, malformed-output, summary-injection, lifecycle/access-control, and `run_validator()` disagreement coverage.
 
-- Contract freeze commit: `4f39e5b5ef023aceb13263269a75bfafee9a4138`.
+- Contract freeze commit: `08c00104d573f347d6389ed78bdd56c84ed12b02`.
 - Contract: [0x4495e1A63062f7c522A26e7F2b494F72B8aDDee7](https://explorer-studio.genlayer.com/address/0x4495e1A63062f7c522A26e7F2b494F72B8aDDee7)
 - Deployment transaction: [0x0812a35ba4bd5a113af536c34f38bedad2639fb74b66f8e6dd786ae2ae9ec312](https://explorer-studio.genlayer.com/tx/0x0812a35ba4bd5a113af536c34f38bedad2639fb74b66f8e6dd786ae2ae9ec312)
 - Status: FINALIZED; GenVM SUCCESS.
 - Constructor: no arguments (permissionless deployment).
-- Source SHA-256: `8130be01c3ceccf2dbf9209b1f0149365e1f1a00ff27b0515275f4a3b84098c1`.
-- `get_info()`: QuorumSeal v0.2.2, minimum confidence 75, maximum payload 24000 bytes.
+- Source SHA-256: `e21b6c47fffc2af43f178a334f18c6a07fc688520ca9b0fc39e65bc239c86b2b`.
+- `get_info()`: QuorumSeal v0.2.3, minimum confidence 75, maximum payload 24000 bytes.
 - Deployed-source parity: VERIFIED through StudioNet `gen_getContractCode`. The returned source decoded to 8,853 bytes and matched `contracts/quorumseal.py` byte-for-byte.
-- Freeze-commit GitHub Actions run [34052207874](https://github.com/Bibidee/quorumseal/actions/runs/34052207874) completed successfully.
+- Final-head GitHub Actions run [34088281175](https://github.com/Bibidee/quorumseal/actions/runs/34088281175) completed successfully.
 
 ## Live lifecycle
 
