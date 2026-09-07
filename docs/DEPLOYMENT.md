@@ -19,4 +19,4 @@ The v0.2.3 release gate passed: 12 helper/unit tests and 34 genuine Direct Mode 
 - Review rationale: model-produced rationale after exact raw-byte payload/evidence verification; rationale text is diagnostic and not consensus-critical.
 - Consumption: [0x05402db29eef31667614ab685e5e1ea983417c8563079c1cb312de698c4248b4](https://explorer-studio.genlayer.com/tx/0x05402db29eef31667614ab685e5e1ea983417c8563079c1cb312de698c4248b4); FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; final state `consumed`.
 
-The v0.2.1 deployment `0xCfE935A245CDC8963348B3CBb97dFb6b00bB80f9` and the v0.2.0 deployment remain historical evidence only.
+The prior v0.2.3-internal-metadata deployment `0x4495e1A63062f7c522A26e7F2b494F72B8aDDee7` (tx `0x0812a35ba4bd5a113af536c34f38bedad2639fb74b66f8e6dd786ae2ae9ec312`), the v0.2.1 deployment `0xCfE935A245CDC8963348B3CBb97dFb6b00bB80f9`, and the v0.2.0 deployment remain historical/superseded evidence only.

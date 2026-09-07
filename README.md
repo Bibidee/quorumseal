@@ -43,4 +43,4 @@ Seal `QS-LIVE-V023-FINAL` binds [payload](https://raw.githubusercontent.com/Bibi
 - [Semantic review](https://explorer-studio.genlayer.com/tx/0xf6bb8c04c1ed99d471490a4fecc6a989ae93ae7536131a00499aa0cb46b87b50): FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; `approved`, confidence 85, with model-produced rationale after hash-verified artifact review.
 - [Consumption](https://explorer-studio.genlayer.com/tx/0x05402db29eef31667614ab685e5e1ea983417c8563079c1cb312de698c4248b4): FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; final state `consumed`.
 
-The v0.2.1 contract `0xCfE935A245CDC8963348B3CBb97dFb6b00bB80f9` and older v0.2.0 deployment are historical.
+The prior v0.2.3-internal-metadata deployment `0x4495e1A63062f7c522A26e7F2b494F72B8aDDee7` (tx `0x0812a35ba4bd5a113af536c34f38bedad2639fb74b66f8e6dd786ae2ae9ec312`), the v0.2.1 contract `0xCfE935A245CDC8963348B3CBb97dFb6b00bB80f9`, and older v0.2.0 deployment are historical/superseded.
