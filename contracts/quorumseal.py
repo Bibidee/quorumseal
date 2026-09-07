@@ -44,8 +44,24 @@ def digest(value):
 
 def url(value):
     result = str(value).strip()
-    if len(result) > MAX_URL or not result.startswith("https://") or "@" in result or "localhost" in result or result.startswith("https://127.") or result.startswith("https://169.254."):
+    authority = re.match(r"^https://([^/?#]+)", result)
+    if not authority or len(result) > MAX_URL or "@" in authority.group(1):
         raise gl.vm.UserError("[EXPECTED] Invalid evidence URL")
+    host = authority.group(1).lower()
+    if host.startswith("[") and "]" in host:
+        host = host[1:host.index("]")]
+        if host == "::" or host == "::1" or host.startswith("fc") or host.startswith("fd") or host.startswith("fe8") or host.startswith("fe9") or host.startswith("fea") or host.startswith("feb") or host.startswith("ff"):
+            raise gl.vm.UserError("[EXPECTED] Invalid evidence URL")
+    else:
+        host = host.split(":")[0]
+        if host == "localhost" or host.endswith(".localhost") or host.endswith(".local"):
+            raise gl.vm.UserError("[EXPECTED] Invalid evidence URL")
+        ipv4 = re.match(r"^\d+\.\d+\.\d+\.\d+$", host)
+        if ipv4:
+            octets = host.split(".")
+            a, b = int(octets[0]), int(octets[1])
+            if a > 255 or b > 255 or int(octets[2]) > 255 or int(octets[3]) > 255 or a == 0 or a == 10 or a == 127 or (a == 169 and b == 254) or (a == 172 and 16 <= b <= 31) or (a == 192 and b == 168) or (a == 192 and b == 0) or (a == 198 and 18 <= b <= 19) or (a == 100 and 64 <= b <= 127) or a == 255:
+                raise gl.vm.UserError("[EXPECTED] Invalid evidence URL")
     return result
 
 def address(value):

@@ -6,6 +6,24 @@ Approval is deterministic and fail-closed: payload_match=yes, evidence_support=y
 
 QuorumSeal holds no funds or escrow and does not prove external-world truth. Exactly one deployable source is kept under `contracts/`; tests and tooling are outside it.
 
+## Why GenLayer / what breaks without GenLayer?
+
+The security decision is intentionally distributed. A single off-chain LLM or centralized verifier could selectively approve a convenient interpretation, hide an unavailable artifact, or change its answer without an auditable consensus boundary. QuorumSeal instead makes every validator independently fetch the exact HTTPS payload and evidence bytes, verify their SHA-256 commitments, and perform its own semantic authorization judgment. The deterministic contract approves only when the independent outcomes agree and every approval condition is satisfied. Without GenLayer, downstream users would need to trust one operator or build and operate an equivalent independent-review quorum themselves.
+
+## Downstream integration
+
+Another Intelligent Contract can use QuorumSeal as an authorization gate before applying a sensitive change:
+
+```python
+seal = quorumseal.get_seal("release-2026-09")
+if seal["status"] != "approved":
+    raise gl.vm.UserError("[EXPECTED] QuorumSeal approval required")
+quorumseal.consume("release-2026-09")  # called by the designated consumer
+apply_committed_change()
+```
+
+The integrating contract must use the designated consumer identity, verify the committed payload again if its own policy requires it, and treat every other status—including `pending`, `blocked`, `cancelled`, and `consumed`—as non-authorizing.
+
 ## Release evidence
 
 - Version: v0.2.2.

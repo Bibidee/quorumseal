@@ -80,7 +80,7 @@ def test_hash_and_url_guards_are_strict():
         except Exception: pass
         else: assert False
     assert m.url("https://example.com/evidence")
-    for value in ("http://example.com", "https://localhost/x", "https://127.0.0.1/x", "https://user:pass@example.com/x"):
+    for value in ("http://example.com", "https://localhost/x", "https://127.0.0.1/x", "https://10.1.2.3/x", "https://172.16.0.1/x", "https://192.168.1.1/x", "https://100.64.0.1/x", "https://[::1]/x", "https://[fd00::1]/x", "https://[fe80::1]/x", "https://user:pass@example.com/x"):
         try: m.url(value)
         except Exception: pass
         else: assert False
