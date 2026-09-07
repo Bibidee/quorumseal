@@ -79,8 +79,23 @@ def test_hash_and_url_guards_are_strict():
         try: m.digest(value)
         except Exception: pass
         else: assert False
-    assert m.url("https://example.com/evidence")
-    for value in ("http://example.com", "https://localhost/x", "https://127.0.0.1/x", "https://10.1.2.3/x", "https://172.16.0.1/x", "https://192.168.1.1/x", "https://100.64.0.1/x", "https://[::1]/x", "https://[fd00::1]/x", "https://[fe80::1]/x", "https://user:pass@example.com/x"):
+    for value in ("https://example.com/evidence", "https://raw.githubusercontent.com/Bibidee/quorumseal/main/README.md", "https://api.example.com/path", "https://sub.domain.example.org/a/b", "https://example.com:443/path"):
+        assert m.url(value) == value
+    invalid = (
+        "http://example.com", "https://localhost/x", "https://foo.local/x",
+        "https://127.0.0.1/x", "https://127.1/x", "https://2130706433/x",
+        "https://0x7f000001/x", "https://0177.0.0.1/x", "https://10.1.2.3/x",
+        "https://172.16.0.1/x", "https://192.168.1.1/x", "https://169.254.1.1/x",
+        "https://100.64.0.1/x", "https://[::1]/x", "https://[0:0:0:0:0:0:0:1]/x",
+        "https://[::]/x", "https://[0:0:0:0:0:0:0:0]/x", "https://[fd00::1]/x",
+        "https://[fe80::1]/x", "https://[::ffff:127.0.0.1]/x", "https://user:pass@example.com/x",
+        "https://user@example.com/x", "https://example.com./x", "https://example/x",
+        "https://example.com%2f@127.0.0.1/x", "https://example\\.com/x", "https://example .com/x",
+        "https://example.com\t/x", "https://example..com/x", "https://-example.com/x",
+        "https://example-.com/x", "https://" + "a" * 64 + ".com/x",
+        "https://" + ("a" * 63 + ".") * 4 + "com/x", "https://example.com:0/x", "https://example.com:65536/x",
+    )
+    for value in invalid:
         try: m.url(value)
         except Exception: pass
         else: assert False

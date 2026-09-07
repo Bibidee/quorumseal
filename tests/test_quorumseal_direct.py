@@ -80,6 +80,24 @@ def test_real_direct_input_guards(direct_vm, direct_deploy, direct_alice, direct
 
 
 @pytest.mark.direct
+@pytest.mark.parametrize("bad_url", [
+    "https://127.1/x",
+    "https://2130706433/x",
+    "https://0x7f000001/x",
+    "https://0177.0.0.1/x",
+    "https://[0:0:0:0:0:0:0:1]/x",
+    "https://[::ffff:127.0.0.1]/x",
+])
+def test_real_direct_url_literal_bypasses_rejected_before_storage(bad_url, direct_vm, direct_deploy, direct_alice, direct_bob):
+    contract = direct_deploy("contracts/quorumseal.py")
+    direct_vm.sender = direct_alice
+    with direct_vm.expect_revert():
+        contract.propose("QS-URL-REJECT", direct_bob, bad_url, PAYLOAD_HASH, PAYLOAD_URL, EVIDENCE_HASH, "summary")
+    with direct_vm.expect_revert():
+        contract.get_seal("QS-URL-REJECT")
+
+
+@pytest.mark.direct
 def test_real_direct_summary_boundary_and_duplicate(direct_vm, direct_deploy, direct_alice, direct_bob):
     contract = direct_deploy("contracts/quorumseal.py")
     direct_vm.sender = direct_alice
