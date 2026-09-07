@@ -1,0 +1,1 @@
+Approval QS-LIVE-V023-001 explicitly authorizes QuorumSeal v0.2.3 live verification QS-LIVE-V023-001.
