@@ -79,7 +79,7 @@ def test_hash_and_url_guards_are_strict():
         try: m.digest(value)
         except Exception: pass
         else: assert False
-    for value in ("https://example.com/evidence", "https://raw.githubusercontent.com/Bibidee/quorumseal/main/README.md", "https://api.example.com/path", "https://sub.domain.example.org/a/b", "https://example.com:443/path"):
+    for value in ("https://example.com/evidence", "https://raw.githubusercontent.com/Bibidee/quorumseal/main/README.md", "https://api.example.com/path", "https://sub.domain.example.org/a/b", "https://example.com:443/path", "https://123.example.com/x", "https://0x7f.example.com/x", "https://release123.example.org/x"):
         assert m.url(value) == value
     invalid = (
         "http://example.com", "https://localhost/x", "https://foo.local/x",
@@ -94,6 +94,9 @@ def test_hash_and_url_guards_are_strict():
         "https://example.com\t/x", "https://example..com/x", "https://-example.com/x",
         "https://example-.com/x", "https://" + "a" * 64 + ".com/x",
         "https://" + ("a" * 63 + ".") * 4 + "com/x", "https://example.com:0/x", "https://example.com:65536/x",
+        "https://0x7f.0x0.0x0.0x1/x", "https://127.0.0.0x1/x", "https://0177.0.0.0x1/x",
+        "https://0x7f.0.0.1/x", "https://127.0x0.0.1/x", "https://0x7f000001/x",
+        "https://0X7F.0X0.0X0.0X1/x",
     )
     for value in invalid:
         try: m.url(value)

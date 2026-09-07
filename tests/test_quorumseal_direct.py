@@ -98,6 +98,21 @@ def test_real_direct_url_literal_bypasses_rejected_before_storage(bad_url, direc
 
 
 @pytest.mark.direct
+@pytest.mark.parametrize("bad_url", [
+    "https://0x7f.0x0.0x0.0x1/x",
+    "https://127.0.0.0x1/x",
+    "https://0177.0.0.0x1/x",
+])
+def test_real_direct_mixed_ipv4_number_hosts_rejected_before_storage(bad_url, direct_vm, direct_deploy, direct_alice, direct_bob):
+    contract = direct_deploy("contracts/quorumseal.py")
+    direct_vm.sender = direct_alice
+    with direct_vm.expect_revert():
+        contract.propose("QS-MIXED-IP-REJECT", direct_bob, bad_url, PAYLOAD_HASH, PAYLOAD_URL, EVIDENCE_HASH, "summary")
+    with direct_vm.expect_revert():
+        contract.get_seal("QS-MIXED-IP-REJECT")
+
+
+@pytest.mark.direct
 def test_real_direct_summary_boundary_and_duplicate(direct_vm, direct_deploy, direct_alice, direct_bob):
     contract = direct_deploy("contracts/quorumseal.py")
     direct_vm.sender = direct_alice

@@ -1,4 +1,4 @@
-# v0.2.4
+# v0.2.5
 # { "Depends": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6" }
 """QuorumSeal: hash-bound semantic approval for reusable change commitments."""
 import hashlib
@@ -37,6 +37,9 @@ def ident(value):
     if not result or len(result) > MAX_ID or not re.match(r"^[A-Za-z0-9_.:-]+$", result): raise gl.vm.UserError("[EXPECTED] Invalid seal id")
     return result
 
+def ipv4_number_component(label):
+    return bool(re.match(r"^[0-9]+$", label) or re.match(r"^0x[0-9a-f]+$", label))
+
 def digest(value):
     result = str(value).strip().lower()
     if not re.match(r"^0x[0-9a-f]{64}$", result): raise gl.vm.UserError("[EXPECTED] Invalid SHA-256")
@@ -64,6 +67,8 @@ def url(value):
     if not host or len(host) > 253 or host.endswith(".") or "." not in host:
         raise gl.vm.UserError("[EXPECTED] Invalid evidence URL")
     labels = host.split(".")
+    if all(ipv4_number_component(label) for label in labels):
+        raise gl.vm.UserError("[EXPECTED] Invalid evidence URL")
     for label in labels:
         if not label or len(label) > 63 or not re.match(r"^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$", label):
             raise gl.vm.UserError("[EXPECTED] Invalid evidence URL")
@@ -180,4 +185,4 @@ class QuorumSeal(gl.Contract):
         return {"id": seal.id, "proposer": seal.proposer.as_hex, "consumer": seal.consumer.as_hex, "payload_url": seal.payload_url, "payload_hash": seal.payload_hash, "evidence_url": seal.evidence_url, "evidence_hash": seal.evidence_hash, "summary": seal.summary, "status": seal.status, "confidence": str(seal.confidence), "rationale": seal.rationale}
 
     @gl.public.view
-    def get_info(self) -> dict: return {"name": "QuorumSeal", "version": "0.2.4", "min_confidence": str(MIN_CONFIDENCE), "max_payload_bytes": str(MAX_PAYLOAD_BYTES)}
+    def get_info(self) -> dict: return {"name": "QuorumSeal", "version": "0.2.5", "min_confidence": str(MIN_CONFIDENCE), "max_payload_bytes": str(MAX_PAYLOAD_BYTES)}
