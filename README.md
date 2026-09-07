@@ -37,10 +37,10 @@ The integrating contract must use the designated consumer identity, verify the c
 
 ## Live lifecycle evidence
 
-Seal `QS-LIVE-V022-001` binds [payload](https://raw.githubusercontent.com/Bibidee/quorumseal/89c836a775af6a153ff81c7af7a382d67b36657a/docs/live/v022-payload.txt) SHA-256 `0x2a575d94b9ccfd6c2f4ca7d114169b55edd55d717a2e1384d6d7b8e4c3a096a9` and [evidence](https://raw.githubusercontent.com/Bibidee/quorumseal/89c836a775af6a153ff81c7af7a382d67b36657a/docs/live/v022-evidence.txt) SHA-256 `0x40209cae06836a028b467f55812abab891bd99b551e22e1aa6d58e20473fefe8`.
+Seal `QS-LIVE-V023-001` binds [payload](https://raw.githubusercontent.com/Bibidee/quorumseal/dcd516763eb755ad275208c5462ce67d27217de9/docs/live/v023-payload.txt) SHA-256 `0x8e6d49bcf5ababf38f10dd746a045bd51af1442b518e0b7bacd69e0b85232811` and [evidence](https://raw.githubusercontent.com/Bibidee/quorumseal/0e16b74546e238db05efd8b3f7d9655719f92bd0/docs/live/v023-evidence.txt) SHA-256 `0x2b29b72019d8a0a257f18cb6c141c0f96ce25348d0572a08036f509665066775`.
 
-- [Proposal](https://explorer-studio.genlayer.com/tx/0xa9e6bb1fc667a05709ceeacd974bd81b5f4c2a22fc06c72d0288e218a1a45ca9): FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; persisted as `pending` with exact commitments.
-- [Semantic review](https://explorer-studio.genlayer.com/tx/0xc8928e6e4d6857d5196ef5309d07b3cb22b49a0476a4b4687ecf80e646927ee7): FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; `approved`, confidence 96, rationale “Evidence explicitly authorizes the exact QuorumSeal v0.2.2 live verification ID in the payload.”
-- [Consumption](https://explorer-studio.genlayer.com/tx/0xa2ed5e6249eb3b95a18d4b2625a9263a7cf2b5b3f51a3f4be84cae4a5d53163b): FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; final state `consumed`.
+- [Proposal](https://explorer-studio.genlayer.com/tx/0x7cd32e68ecfbb80008c320ae925f32de94eee94c76dc17182c41e4d6cef2a3ac): FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; persisted as `pending` with exact commitments.
+- [Semantic review](https://explorer-studio.genlayer.com/tx/0x036d7c660234bbb0f0fe9c3c893f8ee7f78e10d70d96bd09a6bb52b12994f822): FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; `approved`, confidence 90, rationale “Evidence explicitly authorizes the exact payload content.”
+- [Consumption](https://explorer-studio.genlayer.com/tx/0x5d25a1b031b8fbcdffa8c34f9457aeaa9afe28c17c07957bc819124bb1c3ff3d): FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; final state `consumed`.
 
 The v0.2.1 contract `0xCfE935A245CDC8963348B3CBb97dFb6b00bB80f9` and older v0.2.0 deployment are historical.

@@ -14,9 +14,9 @@ The v0.2.3 release gate passed: 12 helper/unit tests and 34 genuine Direct Mode 
 
 ## Live lifecycle
 
-- Proposal: [0xa9e6bb1fc667a05709ceeacd974bd81b5f4c2a22fc06c72d0288e218a1a45ca9](https://explorer-studio.genlayer.com/tx/0xa9e6bb1fc667a05709ceeacd974bd81b5f4c2a22fc06c72d0288e218a1a45ca9); FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; seal `QS-LIVE-V022-001` persisted as `pending` with exact URLs and SHA-256 commitments.
-- Review: [0xc8928e6e4d6857d5196ef5309d07b3cb22b49a0476a4b4687ecf80e646927ee7](https://explorer-studio.genlayer.com/tx/0xc8928e6e4d6857d5196ef5309d07b3cb22b49a0476a4b4687ecf80e646927ee7); FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; status `approved`, confidence 96.
-- Review rationale: `Evidence explicitly authorizes the exact QuorumSeal v0.2.2 live verification ID in the payload.` This is model-produced, not a canonical fallback.
-- Consumption: [0xa2ed5e6249eb3b95a18d4b2625a9263a7cf2b5b3f51a3f4be84cae4a5d53163b](https://explorer-studio.genlayer.com/tx/0xa2ed5e6249eb3b95a18d4b2625a9263a7cf2b5b3f51a3f4be84cae4a5d53163b); FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; final state `consumed`.
+- Proposal: [0x7cd32e68ecfbb80008c320ae925f32de94eee94c76dc17182c41e4d6cef2a3ac](https://explorer-studio.genlayer.com/tx/0x7cd32e68ecfbb80008c320ae925f32de94eee94c76dc17182c41e4d6cef2a3ac); FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; seal `QS-LIVE-V023-001` persisted as `pending` with exact URLs and SHA-256 commitments.
+- Review: [0x036d7c660234bbb0f0fe9c3c893f8ee7f78e10d70d96bd09a6bb52b12994f822](https://explorer-studio.genlayer.com/tx/0x036d7c660234bbb0f0fe9c3c893f8ee7f78e10d70d96bd09a6bb52b12994f822); FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; status `approved`, confidence 90.
+- Review rationale: `Evidence explicitly authorizes the exact payload content`. This is model-produced, not a canonical fallback.
+- Consumption: [0x5d25a1b031b8fbcdffa8c34f9457aeaa9afe28c17c07957bc819124bb1c3ff3d](https://explorer-studio.genlayer.com/tx/0x5d25a1b031b8fbcdffa8c34f9457aeaa9afe28c17c07957bc819124bb1c3ff3d); FINALIZED / MAJORITY_AGREE / GenVM SUCCESS; final state `consumed`.
 
 The v0.2.1 deployment `0xCfE935A245CDC8963348B3CBb97dFb6b00bB80f9` and the v0.2.0 deployment remain historical evidence only.
