@@ -1,4 +1,4 @@
-# v0.2.2
+# v0.2.3
 # { "Depends": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6" }
 """QuorumSeal: hash-bound semantic approval for reusable change commitments."""
 import hashlib
@@ -173,4 +173,4 @@ class QuorumSeal(gl.Contract):
         return {"id": seal.id, "proposer": seal.proposer.as_hex, "consumer": seal.consumer.as_hex, "payload_url": seal.payload_url, "payload_hash": seal.payload_hash, "evidence_url": seal.evidence_url, "evidence_hash": seal.evidence_hash, "summary": seal.summary, "status": seal.status, "confidence": str(seal.confidence), "rationale": seal.rationale}
 
     @gl.public.view
-    def get_info(self) -> dict: return {"name": "QuorumSeal", "version": "0.2.2", "min_confidence": str(MIN_CONFIDENCE), "max_payload_bytes": str(MAX_PAYLOAD_BYTES)}
+    def get_info(self) -> dict: return {"name": "QuorumSeal", "version": "0.2.3", "min_confidence": str(MIN_CONFIDENCE), "max_payload_bytes": str(MAX_PAYLOAD_BYTES)}
